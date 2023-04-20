@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>University Admission</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel= "stylesheet" href="{{ url_for('static',filename='main.css') }}">
+        
+    </head>
+    <body>
+       <h1>Predict your chances of Admission</h1>
+       <div class="login-box">
+       <form action="{{ url_for('result')}}" onsubmit=" return validate()" name="form" method="post" >
+        <div class="user-box">
+    	<input type="text" name="CGPA"  required/>
+        <label for="CGPA">Enter your CGPA: </label>
+        </div>
+
+        <div class="user-box">
+        <input type="text" name="GRE Score"  required />
+        <label for="GRE Score">Enter your GRE Score: </label>
+        </div>
+
+        <div class="user-box">
+
+            <input type="text" name="TOEFL Score"  required />
+        <label for="TOEFL Score">Enter your TOEFL Score: </label>
+		
+        </div>
+
+        <section>Have you done any Research: <section>
+        <div class="user-box">
+        <label for="Research">Yes: </label>
+        <input type="radio" name="Research" value="1"/>
+        </div>
+        <div class="user-box">
+        <label for="Research">No: </label>
+        <input type="radio" name="Research" value="0"/>
+        </div>
+
+        <div class="user-box">
+            <input type="text" name="University Rating"  required />
+        <label for="University Rating">Enter University Rating: </label>
+       
+        </div>
+
+        <div class="user-box">
+       
+        <input type="text" name="SOP"  required/>
+        <label for="SOP">Enter your SOP: </label>
+        </div>
+
+        <div class="user-box">
+        
+        <input type="text" name="LOR"  required/>
+        <label for="LOR">Enter your LOR: </label>
+        </div>
+        <label>
+            <section>{% if check %}
+                {{prediction_text}}
+                {% endif %}</section>
+        
+    </label>
+        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+
+        <button type="reset" class="btn btn-primary btn-block btn-large">Reset</button>
+    </form>
+
+        <form action="{{ url_for('home')}}" method="get">
+            <button type="submit" class="btn btn-primary btn-block btn-large">Go back</button>
+
+        </form>
+        
+       </div>
+        <br>
+        <br>
+        
+
+        <script>
+            function validate(){
+                let from = document.forms["form"];
+                a = Number.isInteger(parseInt(from['CGPA'].value));
+                b = Number.isInteger(parseInt(from['LOR'].value));
+                c = Number.isInteger(parseInt(from['SOP'].value));
+                d = Number.isInteger(parseInt(from['University Rating'].value));
+                e = Number.isInteger(parseInt(from['GRE Score'].value));
+                f = Number.isInteger(parseInt(from['TOEFL Score'].value));
+                if(!a || !b || !c || !d || !e || !f){
+                    
+                    alert("Trying to be Smart, eh !");
+                    return false;
+            
+                }
+                    
+
+            }
+        </script>
+    </body>
+</html>
